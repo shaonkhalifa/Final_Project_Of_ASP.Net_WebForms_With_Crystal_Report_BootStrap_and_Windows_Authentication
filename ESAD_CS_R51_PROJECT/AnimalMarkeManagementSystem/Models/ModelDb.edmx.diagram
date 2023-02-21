@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ad688f893e894e5fabdf394358d63561" Name="Diagram1">
+        <EntityTypeShape EntityType="AMMSDBModel.tblAnimalType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblBuyer" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblColor" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblInvoice" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblLocation" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblSeller" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMMSDBModel.tblSellerProductDetail" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblInvoice__atId__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblSellerP__atId__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblInvoice__bId__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblInvoice__cId__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblInvoice__seId__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblSellerP__slId__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="AMMSDBModel.FK__tblSellerP__seId__74AE54BC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

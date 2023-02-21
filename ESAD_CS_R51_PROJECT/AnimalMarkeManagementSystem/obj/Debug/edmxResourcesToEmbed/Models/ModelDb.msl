@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AMMSDBModelStoreContainer" CdmEntityContainer="AMMSDBEntities">
+    <EntitySetMapping Name="tblAnimalTypes">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblAnimalType">
+        <MappingFragment StoreEntitySet="tblAnimalType">
+          <ScalarProperty Name="atId" ColumnName="atId" />
+          <ScalarProperty Name="animalName" ColumnName="animalName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBuyers">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblBuyer">
+        <MappingFragment StoreEntitySet="tblBuyer">
+          <ScalarProperty Name="bId" ColumnName="bId" />
+          <ScalarProperty Name="buyerName" ColumnName="buyerName" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="bAddress" ColumnName="bAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblColors">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblColor">
+        <MappingFragment StoreEntitySet="tblColor">
+          <ScalarProperty Name="cId" ColumnName="cId" />
+          <ScalarProperty Name="cName" ColumnName="cName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInvoices">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblInvoice">
+        <MappingFragment StoreEntitySet="tblInvoice">
+          <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="bId" ColumnName="bId" />
+          <ScalarProperty Name="atId" ColumnName="atId" />
+          <ScalarProperty Name="cId" ColumnName="cId" />
+          <ScalarProperty Name="seId" ColumnName="seId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="commission" ColumnName="commission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLocations">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblLocation">
+        <MappingFragment StoreEntitySet="tblLocation">
+          <ScalarProperty Name="lId" ColumnName="lId" />
+          <ScalarProperty Name="BlockName" ColumnName="BlockName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSellers">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblSeller">
+        <MappingFragment StoreEntitySet="tblSeller">
+          <ScalarProperty Name="seId" ColumnName="seId" />
+          <ScalarProperty Name="sName" ColumnName="sName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSellerProductDetails">
+      <EntityTypeMapping TypeName="AMMSDBModel.tblSellerProductDetail">
+        <MappingFragment StoreEntitySet="tblSellerProductDetails">
+          <ScalarProperty Name="spdId" ColumnName="spdId" />
+          <ScalarProperty Name="seId" ColumnName="seId" />
+          <ScalarProperty Name="slId" ColumnName="slId" />
+          <ScalarProperty Name="atId" ColumnName="atId" />
+          <ScalarProperty Name="quintity" ColumnName="quintity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AMMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAnimalType">
+          <Key>
+            <PropertyRef Name="atId" />
+          </Key>
+          <Property Name="atId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="animalName" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBuyer">
+          <Key>
+            <PropertyRef Name="bId" />
+          </Key>
+          <Property Name="bId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="buyerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dob" Type="datetime" Nullable="false" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="phone" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="photo" Type="nvarchar" MaxLength="400" />
+          <Property Name="bAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblColor">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblInvoice">
+          <Key>
+            <PropertyRef Name="invoiceID" />
+          </Key>
+          <Property Name="invoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="bId" Type="int" />
+          <Property Name="atId" Type="int" />
+          <Property Name="cId" Type="int" />
+          <Property Name="seId" Type="int" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="commission" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLocation">
+          <Key>
+            <PropertyRef Name="lId" />
+          </Key>
+          <Property Name="lId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlockName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSeller">
+          <Key>
+            <PropertyRef Name="seId" />
+          </Key>
+          <Property Name="seId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="phone" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="sAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="photo" Type="image" />
+        </EntityType>
+        <EntityType Name="tblSellerProductDetails">
+          <Key>
+            <PropertyRef Name="spdId" />
+          </Key>
+          <Property Name="spdId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seId" Type="int" />
+          <Property Name="slId" Type="int" />
+          <Property Name="atId" Type="int" />
+          <Property Name="quintity" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblInvoice__atId__7A672E12">
+          <End Role="tblAnimalType" Type="Self.tblAnimalType" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnimalType">
+              <PropertyRef Name="atId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="atId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__bId__797309D9">
+          <End Role="tblBuyer" Type="Self.tblBuyer" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBuyer">
+              <PropertyRef Name="bId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="bId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__cId__7B5B524B">
+          <End Role="tblColor" Type="Self.tblColor" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblColor">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__seId__7C4F7684">
+          <End Role="tblSeller" Type="Self.tblSeller" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSeller">
+              <PropertyRef Name="seId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="seId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__atId__76969D2E">
+          <End Role="tblAnimalType" Type="Self.tblAnimalType" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnimalType">
+              <PropertyRef Name="atId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="atId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__seId__74AE54BC">
+          <End Role="tblSeller" Type="Self.tblSeller" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSeller">
+              <PropertyRef Name="seId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="seId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__slId__75A278F5">
+          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLocation">
+              <PropertyRef Name="lId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="slId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AMMSDBModelStoreContainer">
+          <EntitySet Name="tblAnimalType" EntityType="Self.tblAnimalType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBuyer" EntityType="Self.tblBuyer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblColor" EntityType="Self.tblColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInvoice" EntityType="Self.tblInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLocation" EntityType="Self.tblLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSeller" EntityType="Self.tblSeller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSellerProductDetails" EntityType="Self.tblSellerProductDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblInvoice__atId__7A672E12" Association="Self.FK__tblInvoice__atId__7A672E12">
+            <End Role="tblAnimalType" EntitySet="tblAnimalType" />
+            <End Role="tblInvoice" EntitySet="tblInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__bId__797309D9" Association="Self.FK__tblInvoice__bId__797309D9">
+            <End Role="tblBuyer" EntitySet="tblBuyer" />
+            <End Role="tblInvoice" EntitySet="tblInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__cId__7B5B524B" Association="Self.FK__tblInvoice__cId__7B5B524B">
+            <End Role="tblColor" EntitySet="tblColor" />
+            <End Role="tblInvoice" EntitySet="tblInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__seId__7C4F7684" Association="Self.FK__tblInvoice__seId__7C4F7684">
+            <End Role="tblSeller" EntitySet="tblSeller" />
+            <End Role="tblInvoice" EntitySet="tblInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__atId__76969D2E" Association="Self.FK__tblSellerP__atId__76969D2E">
+            <End Role="tblAnimalType" EntitySet="tblAnimalType" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__seId__74AE54BC" Association="Self.FK__tblSellerP__seId__74AE54BC">
+            <End Role="tblSeller" EntitySet="tblSeller" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__slId__75A278F5" Association="Self.FK__tblSellerP__slId__75A278F5">
+            <End Role="tblLocation" EntitySet="tblLocation" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AMMSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAnimalType">
+          <Key>
+            <PropertyRef Name="atId" />
+          </Key>
+          <Property Name="atId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="animalName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblInvoices" Relationship="Self.FK__tblInvoice__atId__7A672E12" FromRole="tblAnimalType" ToRole="tblInvoice" />
+          <NavigationProperty Name="tblSellerProductDetails" Relationship="Self.FK__tblSellerP__atId__76969D2E" FromRole="tblAnimalType" ToRole="tblSellerProductDetails" />
+        </EntityType>
+        <EntityType Name="tblBuyer">
+          <Key>
+            <PropertyRef Name="bId" />
+          </Key>
+          <Property Name="bId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="buyerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="photo" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="bAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblInvoices" Relationship="Self.FK__tblInvoice__bId__797309D9" FromRole="tblBuyer" ToRole="tblInvoice" />
+        </EntityType>
+        <EntityType Name="tblColor">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblInvoices" Relationship="Self.FK__tblInvoice__cId__7B5B524B" FromRole="tblColor" ToRole="tblInvoice" />
+        </EntityType>
+        <EntityType Name="tblInvoice">
+          <Key>
+            <PropertyRef Name="invoiceID" />
+          </Key>
+          <Property Name="invoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="bId" Type="Int32" />
+          <Property Name="atId" Type="Int32" />
+          <Property Name="cId" Type="Int32" />
+          <Property Name="seId" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="commission" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="tblAnimalType" Relationship="Self.FK__tblInvoice__atId__7A672E12" FromRole="tblInvoice" ToRole="tblAnimalType" />
+          <NavigationProperty Name="tblBuyer" Relationship="Self.FK__tblInvoice__bId__797309D9" FromRole="tblInvoice" ToRole="tblBuyer" />
+          <NavigationProperty Name="tblColor" Relationship="Self.FK__tblInvoice__cId__7B5B524B" FromRole="tblInvoice" ToRole="tblColor" />
+          <NavigationProperty Name="tblSeller" Relationship="Self.FK__tblInvoice__seId__7C4F7684" FromRole="tblInvoice" ToRole="tblSeller" />
+        </EntityType>
+        <EntityType Name="tblLocation">
+          <Key>
+            <PropertyRef Name="lId" />
+          </Key>
+          <Property Name="lId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlockName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RowNumber" Type="Int32" />
+          <NavigationProperty Name="tblSellerProductDetails" Relationship="Self.FK__tblSellerP__slId__75A278F5" FromRole="tblLocation" ToRole="tblSellerProductDetails" />
+        </EntityType>
+        <EntityType Name="tblSeller">
+          <Key>
+            <PropertyRef Name="seId" />
+          </Key>
+          <Property Name="seId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblInvoices" Relationship="Self.FK__tblInvoice__seId__7C4F7684" FromRole="tblSeller" ToRole="tblInvoice" />
+          <NavigationProperty Name="tblSellerProductDetails" Relationship="Self.FK__tblSellerP__seId__74AE54BC" FromRole="tblSeller" ToRole="tblSellerProductDetails" />
+        </EntityType>
+        <EntityType Name="tblSellerProductDetail">
+          <Key>
+            <PropertyRef Name="spdId" />
+          </Key>
+          <Property Name="spdId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seId" Type="Int32" />
+          <Property Name="slId" Type="Int32" />
+          <Property Name="atId" Type="Int32" />
+          <Property Name="quintity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblAnimalType" Relationship="Self.FK__tblSellerP__atId__76969D2E" FromRole="tblSellerProductDetails" ToRole="tblAnimalType" />
+          <NavigationProperty Name="tblLocation" Relationship="Self.FK__tblSellerP__slId__75A278F5" FromRole="tblSellerProductDetails" ToRole="tblLocation" />
+          <NavigationProperty Name="tblSeller" Relationship="Self.FK__tblSellerP__seId__74AE54BC" FromRole="tblSellerProductDetails" ToRole="tblSeller" />
+        </EntityType>
+        <Association Name="FK__tblInvoice__atId__7A672E12">
+          <End Role="tblAnimalType" Type="Self.tblAnimalType" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnimalType">
+              <PropertyRef Name="atId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="atId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__atId__76969D2E">
+          <End Role="tblAnimalType" Type="Self.tblAnimalType" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnimalType">
+              <PropertyRef Name="atId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="atId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__bId__797309D9">
+          <End Role="tblBuyer" Type="Self.tblBuyer" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBuyer">
+              <PropertyRef Name="bId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="bId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__cId__7B5B524B">
+          <End Role="tblColor" Type="Self.tblColor" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblColor">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblInvoice__seId__7C4F7684">
+          <End Role="tblSeller" Type="Self.tblSeller" Multiplicity="0..1" />
+          <End Role="tblInvoice" Type="Self.tblInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSeller">
+              <PropertyRef Name="seId" />
+            </Principal>
+            <Dependent Role="tblInvoice">
+              <PropertyRef Name="seId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__slId__75A278F5">
+          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLocation">
+              <PropertyRef Name="lId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="slId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSellerP__seId__74AE54BC">
+          <End Role="tblSeller" Type="Self.tblSeller" Multiplicity="0..1" />
+          <End Role="tblSellerProductDetails" Type="Self.tblSellerProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSeller">
+              <PropertyRef Name="seId" />
+            </Principal>
+            <Dependent Role="tblSellerProductDetails">
+              <PropertyRef Name="seId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AMMSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAnimalTypes" EntityType="Self.tblAnimalType" />
+          <EntitySet Name="tblBuyers" EntityType="Self.tblBuyer" />
+          <EntitySet Name="tblColors" EntityType="Self.tblColor" />
+          <EntitySet Name="tblInvoices" EntityType="Self.tblInvoice" />
+          <EntitySet Name="tblLocations" EntityType="Self.tblLocation" />
+          <EntitySet Name="tblSellers" EntityType="Self.tblSeller" />
+          <EntitySet Name="tblSellerProductDetails" EntityType="Self.tblSellerProductDetail" />
+          <AssociationSet Name="FK__tblInvoice__atId__7A672E12" Association="Self.FK__tblInvoice__atId__7A672E12">
+            <End Role="tblAnimalType" EntitySet="tblAnimalTypes" />
+            <End Role="tblInvoice" EntitySet="tblInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__atId__76969D2E" Association="Self.FK__tblSellerP__atId__76969D2E">
+            <End Role="tblAnimalType" EntitySet="tblAnimalTypes" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__bId__797309D9" Association="Self.FK__tblInvoice__bId__797309D9">
+            <End Role="tblBuyer" EntitySet="tblBuyers" />
+            <End Role="tblInvoice" EntitySet="tblInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__cId__7B5B524B" Association="Self.FK__tblInvoice__cId__7B5B524B">
+            <End Role="tblColor" EntitySet="tblColors" />
+            <End Role="tblInvoice" EntitySet="tblInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblInvoice__seId__7C4F7684" Association="Self.FK__tblInvoice__seId__7C4F7684">
+            <End Role="tblSeller" EntitySet="tblSellers" />
+            <End Role="tblInvoice" EntitySet="tblInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__slId__75A278F5" Association="Self.FK__tblSellerP__slId__75A278F5">
+            <End Role="tblLocation" EntitySet="tblLocations" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSellerP__seId__74AE54BC" Association="Self.FK__tblSellerP__seId__74AE54BC">
+            <End Role="tblSeller" EntitySet="tblSellers" />
+            <End Role="tblSellerProductDetails" EntitySet="tblSellerProductDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AMMSDBModelStoreContainer" CdmEntityContainer="AMMSDBEntities">
+          <EntitySetMapping Name="tblAnimalTypes">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblAnimalType">
+              <MappingFragment StoreEntitySet="tblAnimalType">
+                <ScalarProperty Name="atId" ColumnName="atId" />
+                <ScalarProperty Name="animalName" ColumnName="animalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBuyers">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblBuyer">
+              <MappingFragment StoreEntitySet="tblBuyer">
+                <ScalarProperty Name="bId" ColumnName="bId" />
+                <ScalarProperty Name="buyerName" ColumnName="buyerName" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="bAddress" ColumnName="bAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblColors">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblColor">
+              <MappingFragment StoreEntitySet="tblColor">
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="cName" ColumnName="cName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInvoices">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblInvoice">
+              <MappingFragment StoreEntitySet="tblInvoice">
+                <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
+                <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+                <ScalarProperty Name="bId" ColumnName="bId" />
+                <ScalarProperty Name="atId" ColumnName="atId" />
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="seId" ColumnName="seId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="commission" ColumnName="commission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLocations">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblLocation">
+              <MappingFragment StoreEntitySet="tblLocation">
+                <ScalarProperty Name="lId" ColumnName="lId" />
+                <ScalarProperty Name="BlockName" ColumnName="BlockName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSellers">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblSeller">
+              <MappingFragment StoreEntitySet="tblSeller">
+                <ScalarProperty Name="seId" ColumnName="seId" />
+                <ScalarProperty Name="sName" ColumnName="sName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSellerProductDetails">
+            <EntityTypeMapping TypeName="AMMSDBModel.tblSellerProductDetail">
+              <MappingFragment StoreEntitySet="tblSellerProductDetails">
+                <ScalarProperty Name="spdId" ColumnName="spdId" />
+                <ScalarProperty Name="seId" ColumnName="seId" />
+                <ScalarProperty Name="slId" ColumnName="slId" />
+                <ScalarProperty Name="atId" ColumnName="atId" />
+                <ScalarProperty Name="quintity" ColumnName="quintity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
